@@ -28,7 +28,7 @@ public class McpClientApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		var response = chatClient
         .prompt()
-        .user("what is the secret of Mira Caldwell?")
+        .user("what is the secret of Mira Caldwell, and what is her age?")
         .call()
         .content();
 		System.out.println(response);
