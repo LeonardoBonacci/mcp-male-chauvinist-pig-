@@ -8,7 +8,7 @@ import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.client.transport.HttpClientSseClientTransport;
 
 @Configuration
-public class SomeConfig {
+public class JustAnotherConfig {
 
 	@Bean
 	McpSyncClient mcpSyncClient() {

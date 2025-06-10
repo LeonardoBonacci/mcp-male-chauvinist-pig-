@@ -1,7 +1,11 @@
 package guru.bonacci.mcp_client;
 
+import java.util.Arrays;
+
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
+import org.springframework.ai.tool.ToolCallback;
+import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +23,12 @@ public class McpClientApplication implements CommandLineRunner {
 	private final ChatClient chatClient;
 
 	public McpClientApplication(ChatClient.Builder builder, McpSyncClient mcpSyncClient) {
+		ToolCallbackProvider provider = new SyncMcpToolCallbackProvider(mcpSyncClient);
+
+		// Get all available tools
+		ToolCallback[] tools = provider.getToolCallbacks();
+		Arrays.stream(tools).map(tool ->  tool.getToolDefinition().description()).forEach(System.out::println);
+		
 		this.chatClient = builder
 					  .defaultToolCallbacks(new SyncMcpToolCallbackProvider(mcpSyncClient))
 						.build();
